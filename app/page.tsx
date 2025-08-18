@@ -1,103 +1,146 @@
+"use client";
+import FeaturesBento from "./_components/Bento1";
 import Image from "next/image";
+import { motion } from "motion/react";
+import { BentoGridThirdDemo } from "./_components/BentoGridThirdDemo";
+import { UserButton, useUser } from "@clerk/nextjs";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import Footer from "./_components/Footer";
 
-export default function Home() {
+export default function HeroSectionOne() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="relative mx-auto my-10 flex max-w-7xl flex-col items-center justify-center">
+      <Navbar />
+      <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
+      </div>
+      <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
+      </div>
+      <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+      </div>
+      <div className="px-4 py-10 md:py-20">
+        <h1 className="relative z-10 mx-auto max-w-4xl text-center text-xl font-bold text-slate-700 md:text-2xl lg:text-4xl dark:text-slate-300">
+          {"AI-Powered Medical Agent for Smarter Conversations"
+            .split(" ")
+            .map((word, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
+                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: index * 0.1,
+                  ease: "easeInOut",
+                }}
+                className="mr-2 inline-block"
+              >
+                {word}
+              </motion.span>
+            ))}
+        </h1>
+        <motion.p
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            duration: 0.3,
+            delay: 0.8,
+          }}
+          className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
+        >
+          Transform the way you connect, create, and collaborate — with seamless speech-to-text, instant responses, and intelligent tools at your fingertips.
+        </motion.p>
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            duration: 0.3,
+            delay: 1,
+          }}
+          className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
+        >
+          <button className="w-60 transform rounded-lg bg-green-600 px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+            Explore Now
+          </button>
+        </motion.div>
+          <div className="relative py-20 bg-white dark:bg-neutral-900">
+  {/* Top Separator */}
+  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-neutral-700"></div>
+  
+  <div className="max-w-6xl mx-auto px-6">
+    <h2 className="text-3xl font-bold text-center mb-14">
+      🩺 <span className="text-emerald-400">Medi</span>Voice AI Features
+    </h2>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    {/* Features Box */}
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 
+                    border border-gray-200 dark:border-neutral-700 
+                    rounded-3xl shadow-lg overflow-hidden bg-white dark:bg-neutral-800">
+      
+      <div className="p-8 flex flex-col items-center text-center space-y-4">
+        <img className="rounded-full p-2" width={85} src="/doc.gif" alt="" />
+        <p className="font-bold">🩺 AI Medical Consultation</p>
+        <p>Talk to our intelligent AI Medical Agent anytime — instant, accurate, and human-like guidance.</p>
+      </div>
+
+      <div className="p-8 flex flex-col items-center text-center space-y-4 
+                      border-t lg:border-t-0 lg:border-l border-gray-200 dark:border-neutral-700">
+        <img className="rounded-full p-2" width={95} src="/note.gif" alt="" />
+        <p className="font-bold">📄 Automated Medical Reports</p>
+        <p>Get easy-to-read medical reports generated automatically after your consultation.</p>
+      </div>
+
+      <div className="p-8 flex flex-col items-center text-center space-y-4 
+                      border-t lg:border-t-0 lg:border-l border-gray-200 dark:border-neutral-700">
+        <img className="bg-slate-400 rounded-full p-2" width={88} src="/coin.gif" alt="" />
+        <p className="font-bold">💰 Affordable & Accessible</p>
+        <p>High-quality healthcare at the lowest price — available to everyone, everywhere.</p>
+      </div>
+    </div>
+  </div>
+
+  {/* Bottom Separator */}
+  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-neutral-700"></div>
+</div>
+
+
+      </div>
+      <FeaturesBento/>
+      <Footer/>
     </div>
   );
 }
+
+const Navbar = () => {
+  const user = useUser();
+  return (
+    <nav className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-4 py-4 dark:border-neutral-800">
+      <div className="flex items-center gap-2">
+        <div className="" />
+         <Image src='/logo.png' alt='logo' width={180} height={90}/>
+      </div>
+      {!user ?
+      <Link href={'/sign-in'}>
+      <button className="w-24 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 md:w-32 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+        Login
+      </button>
+      </Link>
+      :
+      <div className="flex item center gap-5">
+        <UserButton/>
+        <Link href={'/dashboard'}><Button>Dashbord</Button></Link>
+      </div>
+}
+    </nav>
+  );
+};
