@@ -78,7 +78,7 @@ const endCall = async () => {
     },
     voice:{
       provider:'11labs',
-      voiceId: 'Will'
+      voiceId: 'Sarah'
     },
     model:{
       provider : 'openai',
