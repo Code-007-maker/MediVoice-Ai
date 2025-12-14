@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table"
 import { SessionDetail } from '../medical-agent/[sessionId]/page'
 import ViewReportDialog from './ViewReportDialog'
+import DoctorNotesDialog from "../../../_components/DoctorNotesDialog"
 
 type Props = {
     historyList?: SessionDetail[] // make optional to handle undefined
@@ -52,9 +53,14 @@ function HistoryTable({ historyList = [] }: Props) {
                                     ? moment(new Date(record.createdOn)).fromNow()
                                     : 'Unknown date'}
                             </TableCell>
-                            <TableCell className="text-right">
-                                <ViewReportDialog record={record} />
-                            </TableCell>
+                            <TableCell className="text-right flex gap-2 justify-end">
+  <ViewReportDialog record={record} />
+
+  <DoctorNotesDialog
+    sessionId={record.id} 
+  />
+</TableCell>
+
                         </TableRow>
                     ))}
                 </TableBody>

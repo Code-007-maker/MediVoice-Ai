@@ -16,7 +16,7 @@ function Historylist() {
 
   const GetHistoryList = async()=>{
     const result = await axios.get('/api/session-chart?sessionId=all');
-    console.log(result.data);
+  
     sethistorylist(result.data)
   }
 

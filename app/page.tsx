@@ -7,6 +7,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Footer from "./_components/Footer";
+import SymptomChecker from "./_components/SymptomChecker";
 
 export default function HeroSectionOne() {
   return (
@@ -73,6 +74,7 @@ export default function HeroSectionOne() {
             Explore Now
           </button>
         </motion.div>
+        <SymptomChecker/>
           <div className="relative py-20 bg-white dark:bg-neutral-900">
   {/* Top Separator */}
   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-neutral-700"></div>
@@ -112,8 +114,6 @@ export default function HeroSectionOne() {
   {/* Bottom Separator */}
   <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-neutral-700"></div>
 </div>
-
-
       </div>
       <FeaturesBento/>
       <Footer/>
@@ -122,25 +122,38 @@ export default function HeroSectionOne() {
 }
 
 const Navbar = () => {
-  const user = useUser();
+  const { isSignedIn, isLoaded } = useUser();
+
+  // Avoid hydration mismatch
+  if (!isLoaded) return null;
+
   return (
     <nav className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-4 py-4 dark:border-neutral-800">
       <div className="flex items-center gap-2">
-        <div className="" />
-         <Image src='/logo.png' alt='logo' width={180} height={90}/>
+        <Image src="/logo.png" alt="logo" width={180} height={90} />
       </div>
-      {!user ?
-      <Link href={'/sign-in'}>
-      <button className="w-24 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 md:w-32 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-        Login
-      </button>
-      </Link>
-      :
-      <div className="flex item center gap-5">
-        <UserButton/>
-        <Link href={'/dashboard'}><Button>Dashbord</Button></Link>
+      <div className="flex gap-5">
+      <Link href="/doctor-login">
+  <button className="w-24 transform rounded-lg bg-green-600 px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 md:w-39 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+    Doctor Login
+  </button>
+</Link>
+
+      {!isSignedIn ? (
+        <Link href="/sign-in">
+          <button className="w-24 transform rounded-lg bg-green-600 px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 md:w-32 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+            Login
+          </button>
+        </Link>
+      ) : (
+        <div className="flex items-center gap-5">
+          <UserButton />
+          <Link href="/dashboard">
+            <Button>Dashboard</Button>
+          </Link>
+        </div>
+      )}
       </div>
-}
     </nav>
   );
 };

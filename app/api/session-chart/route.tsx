@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
         .from(sessionChartTable)
         //@ts-ignore
         .where(eq(sessionChartTable.createdBy, user.primaryEmailAddress.emailAddress))
-        .orderBy(desc(sessionChartTable.id)); // ✅ Needs desc import
+        .orderBy(desc(sessionChartTable.id)); 
       return NextResponse.json(result);
     } else {
       const result = await db
